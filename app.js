@@ -1,8 +1,9 @@
 let listaDeNumerosSorteados = [];
-let limiteNumeroSorteado = 10;
+let limiteNumeroSorteado = parseInt(prompt('Digite um valor máximo:'));
 let numeroSecreto = gerarNumeroAleatorio();
 exibirMensagensIniciais();
 let tentativas = 1;
+
 
 //let titulo = document.querySelector('h1');
 //titulo.innerHTML = 'Jogo do número secreto!';
@@ -20,13 +21,19 @@ function exibirTextoTela(tag, texto){
 
 function exibirMensagensIniciais(){
     exibirTextoTela('h1', 'Jogo do número secreto!');
-    exibirTextoTela('p', 'Escolha um numero de 1 a ' + limiteNumeroSorteado + '!');
+    exibirTextoTela('p', 'Escolha um número de 1 a ' + limiteNumeroSorteado + '!');
 }
 
 function verificarChute(){
     let chute = document.querySelector('input').value;
+    console.log(tentativas);
+    console.log(listaDeNumerosSorteados);
 
-    if(chute == numeroSecreto){        
+    if(document.querySelector('input').value <= 0 || document.querySelector('input') == ' ' || document.querySelector('input').value > limiteNumeroSorteado){
+        tentativas = tentativas;
+        exibirTextoTela('p', 'Escolha um número válido!');
+
+    }else if(chute == numeroSecreto){        
         
         let palavraTentativas = tentativas == 1? 'tentativa' : 'tentativas';
         let mensagemTentativas = `Você acertou o numero secreto com ${tentativas} ${palavraTentativas}!`;
@@ -45,7 +52,7 @@ function verificarChute(){
         //tentativas = tentativas + 1;
         tentativas++;
         limparCampo();
-    } 
+    }   
     
 }
 
@@ -77,4 +84,5 @@ function reinicairJogo(){
     exibirMensagensIniciais();
     tentativas = 1;
     document.getElementById('reiniciar').setAttribute('disabled', true);
+    
 }
